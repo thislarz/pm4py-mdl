@@ -256,7 +256,7 @@ def get_python_obj(df, obj_df=None, parameters=None):
         ret[prefix + "events"][el["id"]] = el2
 
     for t in ot_df:
-        stream = ot_df[t].to_dict('r')
+        stream = ot_df[t].to_dict('records')
         for el in stream:
             el2 = {}
             el2[prefix + "type"] = t

@@ -1,4 +1,4 @@
-pm4py>=2.2.15
+pm4py==2.2.15
 pyarrow
 Flask
 flask-cors

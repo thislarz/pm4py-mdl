@@ -70,7 +70,7 @@ succint_table.type = "succint"
 
 mdl_exporter.apply(succint_table, "sap_withoutTrial.mdl")
 
-stream = succint_table.to_dict('r')
+stream = succint_table.to_dict('records')
 
 tgroups = {}
 

@@ -90,7 +90,7 @@ class Process(object):
 
     def get_stream(self):
         if self.stream is None:
-            self.stream = self.exploded_dataframe.to_dict('r')
+            self.stream = self.exploded_dataframe.to_dict('records')
         return self.stream
 
     def get_log_obj_type(self, objtype):
@@ -99,7 +99,7 @@ class Process(object):
         dataframe = succint_mdl_to_exploded_mdl.apply(dataframe)
         dataframe = dataframe.rename(columns={"event_activity": "concept:name", "event_timestamp": "time:timestamp",
                                               objtype: "case:concept:name"})
-        stream = EventStream(dataframe.to_dict('r'))
+        stream = EventStream(dataframe.to_dict('records'))
         log = log_conv_factory.apply(stream)
         log = sorting.sort_timestamp(log, "time:timestamp")
         exported_log = base64.b64encode(xes_exporter.export_log_as_string(log)).decode("utf-8")
@@ -265,7 +265,7 @@ class Process(object):
         event_cols = [x for x in columns if x.startswith("event_")]
         obj_cols = [x for x in columns if not x.startswith("event_")]
         columns = event_cols + obj_cols
-        stream = table[columns].to_dict('r')
+        stream = table[columns].to_dict('records')
         events = []
         for ev in stream:
             events.append([])

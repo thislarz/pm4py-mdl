@@ -6,6 +6,7 @@ def apply(df, min_acti_freq=0):
             df = succint_mdl_to_exploded_mdl.apply(df)
     except:
         pass
+    print("\nNow in clean frequencies \n\n", type(df))
     activ = dict(df.groupby("event_id").first()["event_activity"].value_counts())
     activ = [x for x,y in activ.items() if y >= min_acti_freq]
     return df[df["event_activity"].isin(activ)]
